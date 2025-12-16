@@ -1,0 +1,20 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: student-management-system
+  datasource:
+    # URL includes parameters for timezone and SSL compatibility
+    url: jdbc:mysql://localhost:3306/student_management_db?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    username: root
+    password: Rasha5416/6145 # TODO: Change this
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    open-in-view: false # Good practice to disable OSIV
+    show-sql: true
+    hibernate:
+      ddl-auto: validate # We use Flyway for schema management
+  flyway:
+    enabled: true
+    baseline-on-migrate: true # Helps if you run on an existing DB
