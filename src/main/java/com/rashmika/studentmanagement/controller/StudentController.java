@@ -29,4 +29,23 @@ public class StudentController {
             @RequestBody StudentDto studentDto) {
         return new ResponseEntity<>(studentService.createStudent(studentDto), HttpStatus.CREATED);
     }
+
+    @PutMapping
+    public ResponseEntity<StudentDto> updateStudent(
+            @PathVariable Long id,
+            @Valid @RequestBody StudentDto studentDto) {
+        return new ResponseEntity<>(studentService.updateStudent(id, studentDto), HttpStatus.OK);
+    }
+
+    @DeleteMapping
+    public ResponseEntity<String> deleteStudent(
+            @PathVariable Long id){
+        studentService.deleteStudent(id);
+        return ResponseEntity.ok("Student deleted successfully");
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<StudentDto> getstudentById(Long id){
+        return ResponseEntity.ok(studentService.findStudentById(id));
+    }
 }

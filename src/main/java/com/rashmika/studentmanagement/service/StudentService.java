@@ -33,6 +33,42 @@ public class StudentService {
         return mapToDto(savedStudent);
    }
 
+   public StudentDto updateStudent(Long id, StudentDto studentDto) {
+       Student existingStudent = studentRepository.findById(id).orElseThrow(
+               () -> new RuntimeException("Student not found")
+       );
+       existingStudent.setFirstName(studentDto.getFirstName());
+       existingStudent.setLastName(studentDto.getLastName());
+       existingStudent.setMajor(studentDto.getMajor());
+       existingStudent.setEnrollmentDate(studentDto.getEnrollmentDate());
+
+       if (!existingStudent.getEmail().equals(studentDto.getEmail())){
+           if (studentRepository.existsByEmail(existingStudent.getEmail())){
+               throw new RuntimeException("Email already exists");
+           }
+           existingStudent.setEmail(studentDto.getEmail());
+       }
+
+       Student updateStudent = studentRepository.save(existingStudent);
+       return mapToDto(updateStudent);
+
+
+   }
+
+   public StudentDto findStudentById(Long id) {
+       Student student = studentRepository.findById(id).orElseThrow(
+                ()-> new RuntimeException("Student not found")
+        );
+       return mapToDto(student);
+   }
+
+   public void deleteStudent(Long id) {
+        if (!studentRepository.existsById(id)){
+            throw new RuntimeException("Student not found");
+        }
+        studentRepository.deleteById(id);
+   }
+
     private StudentDto mapToDto(Student student) {
         StudentDto studentDto = new StudentDto();
         studentDto.setFirstName(student.getFirstName());
