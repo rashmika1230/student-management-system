@@ -7,6 +7,9 @@ import java.time.LocalDate;
 
 @Data
 public class StudentDto {
+
+    private Long id;
+
     @NotBlank(message = "FirstName is required")
     private String firstName;
 

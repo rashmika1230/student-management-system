@@ -71,6 +71,7 @@ public class StudentService {
 
     private StudentDto mapToDto(Student student) {
         StudentDto studentDto = new StudentDto();
+        studentDto.setId(student.getId());
         studentDto.setFirstName(student.getFirstName());
         studentDto.setLastName(student.getLastName());
         studentDto.setEmail(student.getEmail());
@@ -82,6 +83,7 @@ public class StudentService {
 
     private Student mapToEntity(StudentDto dto) {
         Student student = new Student();
+        student.setId(dto.getId());
         student.setFirstName(dto.getFirstName());
         student.setLastName(dto.getLastName());
         student.setEmail(dto.getEmail());
